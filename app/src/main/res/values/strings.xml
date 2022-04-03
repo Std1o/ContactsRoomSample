@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Data Storing</string>
+    <string name="name">Имя</string>
+    <string name="age">Возраст</string>
+    <string name="save">Сохранить</string>
+    <string name="info">Имя: %s\nВозраст: %d</string>
+</resources>

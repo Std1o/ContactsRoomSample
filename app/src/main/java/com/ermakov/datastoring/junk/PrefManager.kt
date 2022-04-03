@@ -1,4 +1,4 @@
-package com.ermakov.datastoring
+package com.ermakov.datastoring.junk
 
 import android.content.Context
 import android.content.SharedPreferences

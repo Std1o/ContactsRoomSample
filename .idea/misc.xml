@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_files_saving.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_new_word.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_pref_example.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/item_word.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -1,8 +1,9 @@
-package com.ermakov.datastoring
+package com.ermakov.datastoring.junk
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ermakov.datastoring.R
 import com.ermakov.datastoring.databinding.ActivityPrefExampleBinding
 
 class PrefExampleActivity : AppCompatActivity() {

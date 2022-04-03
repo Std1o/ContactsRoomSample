@@ -1,4 +1,4 @@
-package com.ermakov.datastoring
+package com.ermakov.datastoring.junk
 
 import android.os.Bundle
 import android.os.Environment

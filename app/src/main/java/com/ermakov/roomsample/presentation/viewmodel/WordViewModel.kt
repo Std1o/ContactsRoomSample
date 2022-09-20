@@ -1,8 +1,8 @@
-package com.ermakov.roomsample.viewmodel
+package com.ermakov.roomsample.presentation.viewmodel
 
 import androidx.lifecycle.*
 import com.ermakov.roomsample.model.Word
-import com.ermakov.roomsample.repository.WordRepository
+import com.ermakov.roomsample.data.WordRepository
 import kotlinx.coroutines.launch
 
 class WordViewModel(private val repository: WordRepository) : ViewModel() {

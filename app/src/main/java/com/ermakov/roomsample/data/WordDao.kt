@@ -1,4 +1,4 @@
-package com.ermakov.roomsample.dao
+package com.ermakov.roomsample.data
 
 import androidx.room.Dao
 import androidx.room.Insert

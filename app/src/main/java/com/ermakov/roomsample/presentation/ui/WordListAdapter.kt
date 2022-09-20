@@ -1,4 +1,4 @@
-package com.ermakov.roomsample.ui
+package com.ermakov.roomsample.presentation.ui
 
 import android.view.LayoutInflater
 import android.view.View

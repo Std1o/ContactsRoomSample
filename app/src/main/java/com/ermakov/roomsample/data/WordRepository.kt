@@ -1,7 +1,7 @@
-package com.ermakov.roomsample.repository
+package com.ermakov.roomsample.data
 
 import androidx.annotation.WorkerThread
-import com.ermakov.roomsample.dao.WordDao
+import com.ermakov.roomsample.data.WordDao
 import com.ermakov.roomsample.model.Word
 import kotlinx.coroutines.flow.Flow
 

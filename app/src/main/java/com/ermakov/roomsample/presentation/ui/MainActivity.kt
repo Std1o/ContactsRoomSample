@@ -1,4 +1,4 @@
-package com.ermakov.roomsample.ui
+package com.ermakov.roomsample.presentation.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
 import com.ermakov.roomsample.app.WordsApplication
 import com.ermakov.roomsample.model.Word
-import com.ermakov.roomsample.viewmodel.WordViewModel
-import com.ermakov.roomsample.viewmodel.WordViewModelFactory
+import com.ermakov.roomsample.presentation.viewmodel.WordViewModel
+import com.ermakov.roomsample.presentation.viewmodel.WordViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {

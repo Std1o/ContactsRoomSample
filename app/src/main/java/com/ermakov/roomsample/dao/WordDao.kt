@@ -1,10 +1,10 @@
-package com.ermakov.datastoring.dao
+package com.ermakov.roomsample.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.ermakov.datastoring.model.Word
+import com.ermakov.roomsample.model.Word
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,12 +1,12 @@
-package com.ermakov.datastoring.db
+package com.ermakov.roomsample.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.ermakov.datastoring.dao.WordDao
-import com.ermakov.datastoring.model.Word
+import com.ermakov.roomsample.dao.WordDao
+import com.ermakov.roomsample.model.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

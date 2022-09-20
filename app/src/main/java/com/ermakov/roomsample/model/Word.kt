@@ -1,4 +1,4 @@
-package com.ermakov.datastoring.model
+package com.ermakov.roomsample.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

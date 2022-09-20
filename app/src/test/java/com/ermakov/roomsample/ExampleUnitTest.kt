@@ -1,4 +1,4 @@
-package com.ermakov.datastoring
+package com.ermakov.roomsample
 
 import org.junit.Test
 

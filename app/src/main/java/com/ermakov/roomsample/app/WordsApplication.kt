@@ -1,8 +1,8 @@
-package com.ermakov.datastoring.app
+package com.ermakov.roomsample.app
 
 import android.app.Application
-import com.ermakov.datastoring.db.WordRoomDatabase
-import com.ermakov.datastoring.repository.WordRepository
+import com.ermakov.roomsample.db.WordRoomDatabase
+import com.ermakov.roomsample.repository.WordRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 

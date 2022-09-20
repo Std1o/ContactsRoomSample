@@ -1,4 +1,4 @@
-package com.ermakov.datastoring.ui
+package com.ermakov.roomsample.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ermakov.datastoring.R
-import com.ermakov.datastoring.model.Word
+import com.ermakov.roomsample.R
+import com.ermakov.roomsample.model.Word
 
 class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsComparator()) {
 

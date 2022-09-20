@@ -1,4 +1,4 @@
-package com.ermakov.datastoring.ui
+package com.ermakov.roomsample.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import com.ermakov.datastoring.R
+import com.ermakov.roomsample.R
 
 class NewWordActivity : AppCompatActivity() {
 

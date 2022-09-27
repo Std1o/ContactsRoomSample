@@ -11,7 +11,7 @@
         android:id="@+id/tv_new_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_contact"
+        android:text="@string/contact_editing"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName|textCapWords"/>
@@ -62,7 +62,7 @@
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:text="@string/add"
+        android:text="@string/save"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

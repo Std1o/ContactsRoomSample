@@ -7,11 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ermakov.roomsample.databinding.DialogNewContactBinding
+import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.ARG_NAME
+import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.ARG_PHONE
+import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.KEY_ADD_OR_EDIT_CONTACT
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
-
-const val ARG_ITEM_COUNT = "item_count"
 
 class NewContactDialogFragment : BottomSheetDialogFragment() {
 
@@ -29,21 +30,25 @@ class NewContactDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val bottomSheet = view.parent as View
-        bottomSheet.backgroundTintMode = PorterDuff.Mode.CLEAR;
-        bottomSheet.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT);
-        bottomSheet.setBackgroundColor(Color.TRANSPARENT);
+        bottomSheet.backgroundTintMode = PorterDuff.Mode.CLEAR
+        bottomSheet.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
+        bottomSheet.setBackgroundColor(Color.TRANSPARENT)
+
+        with(binding) {
+            btnAdd.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(ARG_NAME, name.text.toString())
+                bundle.putString(ARG_PHONE, phone.text.toString())
+                requireActivity()
+                    .supportFragmentManager
+                    .setFragmentResult(KEY_ADD_OR_EDIT_CONTACT, bundle)
+                dismiss()
+            }
+        }
     }
 
     companion object {
-
-        // TODO: Customize parameters
-        fun newInstance(itemCount: Int): NewContactDialogFragment =
-            NewContactDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_ITEM_COUNT, itemCount)
-                }
-            }
-
+        fun newInstance(): NewContactDialogFragment = NewContactDialogFragment()
     }
 
     override fun onDestroyView() {

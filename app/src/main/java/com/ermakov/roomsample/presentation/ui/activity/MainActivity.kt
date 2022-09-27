@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
     private val newWordActivityRequestCode = 1
     private val wordViewModel by viewModels<ContactsViewModel>()
 
+    companion object {
+        const val KEY_ADD_OR_EDIT_CONTACT = "key_add_or_edit_contact"
+        const val ARG_NAME = "arg_name"
+        const val ARG_PHONE = "arg_phone"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,8 +51,18 @@ class MainActivity : AppCompatActivity() {
             //val intent = Intent(this@MainActivity, NewWordActivity::class.java)
             //startActivityForResult(intent, newWordActivityRequestCode)
             NewContactDialogFragment
-                .newInstance(5)
+                .newInstance()
                 .show(supportFragmentManager, "new_contact")
+            setFragmentResultListeners()
+        }
+    }
+
+    private fun setFragmentResultListeners() {
+        supportFragmentManager.setFragmentResultListener(KEY_ADD_OR_EDIT_CONTACT, this) { _, bundle ->
+            val name = bundle.getString(ARG_NAME) ?: return@setFragmentResultListener
+            val phone = bundle.getString(ARG_PHONE) ?: return@setFragmentResultListener
+            val word = Contact(name, phone)
+            wordViewModel.insert(word)
         }
     }
 
@@ -55,8 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
-                val word = Contact(reply, "8800553535")
-                wordViewModel.insert(word)
+
             }
         } else {
             Toast.makeText(

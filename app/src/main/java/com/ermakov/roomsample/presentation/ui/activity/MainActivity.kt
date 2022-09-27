@@ -1,4 +1,4 @@
-package com.ermakov.roomsample.presentation.ui
+package com.ermakov.roomsample.presentation.ui.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
 import com.ermakov.roomsample.model.Contact
+import com.ermakov.roomsample.presentation.ui.ContactsListAdapter
+import com.ermakov.roomsample.presentation.ui.NewWordActivity
+import com.ermakov.roomsample.presentation.ui.dialogs.NewContactDialogFragment
 import com.ermakov.roomsample.presentation.viewmodel.ContactsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,8 +42,11 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById<FloatingActionButton>(R.id.bntAdd)
         fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            //val intent = Intent(this@MainActivity, NewWordActivity::class.java)
+            //startActivityForResult(intent, newWordActivityRequestCode)
+            NewContactDialogFragment
+                .newInstance(5)
+                .show(supportFragmentManager, "new_contact")
         }
     }
 

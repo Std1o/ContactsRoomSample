@@ -4,4 +4,8 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
     <string name="add_word">Add word</string>
+    <string name="name">Имя</string>
+    <string name="phone">Телефон</string>
+    <string name="add">Добавить</string>
+    <string name="new_contact">Новый контакт</string>
 </resources>

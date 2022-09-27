@@ -9,18 +9,16 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
-import com.ermakov.roomsample.app.WordsApplication
 import com.ermakov.roomsample.model.Word
 import com.ermakov.roomsample.presentation.viewmodel.WordViewModel
-import com.ermakov.roomsample.presentation.viewmodel.WordViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val newWordActivityRequestCode = 1
-    private val wordViewModel: WordViewModel by viewModels {
-        WordViewModelFactory((application as WordsApplication).repository)
-    }
+    private val wordViewModel by viewModels<WordViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,9 +3,11 @@ package com.ermakov.roomsample.app
 import android.app.Application
 import com.ermakov.roomsample.data.WordRoomDatabase
 import com.ermakov.roomsample.data.WordRepository
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
+@HiltAndroidApp
 class WordsApplication : Application() {
     // No need to cancel this scope as it'll be torn down with the process
     val applicationScope = CoroutineScope(SupervisorJob())

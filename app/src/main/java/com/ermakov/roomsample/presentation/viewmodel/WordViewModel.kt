@@ -3,9 +3,12 @@ package com.ermakov.roomsample.presentation.viewmodel
 import androidx.lifecycle.*
 import com.ermakov.roomsample.model.Word
 import com.ermakov.roomsample.data.WordRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WordViewModel(private val repository: WordRepository) : ViewModel() {
+@HiltViewModel
+class WordViewModel @Inject constructor(private val repository: WordRepository) : ViewModel() {
 
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
@@ -18,15 +21,5 @@ class WordViewModel(private val repository: WordRepository) : ViewModel() {
      */
     fun insert(word: Word) = viewModelScope.launch {
         repository.insert(word)
-    }
-}
-
-class WordViewModelFactory(private val repository: WordRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WordViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return WordViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

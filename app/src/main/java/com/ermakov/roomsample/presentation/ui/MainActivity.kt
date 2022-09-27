@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
-import com.ermakov.roomsample.model.Word
+import com.ermakov.roomsample.model.Contact
 import com.ermakov.roomsample.presentation.viewmodel.WordViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
-                val word = Word(reply)
+                val word = Contact(reply, "8800553535")
                 wordViewModel.insert(word)
             }
         } else {

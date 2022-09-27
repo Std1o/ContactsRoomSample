@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
-import com.ermakov.roomsample.model.Word
+import com.ermakov.roomsample.model.Contact
 
-class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsComparator()) {
+class WordListAdapter : ListAdapter<Contact, WordListAdapter.WordViewHolder>(WordsComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)
@@ -18,14 +18,14 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsC
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.word)
+        holder.bind(current.name, current.phone)
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val wordItemView: TextView = itemView.findViewById(R.id.textView)
 
-        fun bind(text: String?) {
-            wordItemView.text = text
+        fun bind(name: String, phone: String) {
+            wordItemView.text = "$name\n$phone"
         }
 
         companion object {
@@ -37,13 +37,13 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsC
         }
     }
 
-    class WordsComparator : DiffUtil.ItemCallback<Word>() {
-        override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+    class WordsComparator : DiffUtil.ItemCallback<Contact>() {
+        override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
-            return oldItem.word == newItem.word
+        override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+            return oldItem.name == newItem.name
         }
     }
 }

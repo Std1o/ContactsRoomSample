@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.ermakov.roomsample.model.Word
+import com.ermakov.roomsample.model.Contact
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Word::class], version = 1, exportSchema = false)
+@Database(entities = [Contact::class], version = 1, exportSchema = false)
 abstract class ContactsDB : RoomDatabase() {
 
     abstract fun contactsDao(): ContactsDao
@@ -23,19 +23,7 @@ abstract class ContactsDB : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     val wordDao = database.contactsDao()
-
-                    // Delete all content here.
                     wordDao.deleteAll()
-
-                    // Add sample words.
-                    var word = Word("Hello")
-                    wordDao.insert(word)
-                    word = Word("World!")
-                    wordDao.insert(word)
-
-                    // TODO: Add your own words!
-                    word = Word("TODO!")
-                    wordDao.insert(word)
                 }
             }
         }

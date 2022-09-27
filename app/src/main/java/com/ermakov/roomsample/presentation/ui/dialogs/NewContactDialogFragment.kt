@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ermakov.roomsample.databinding.DialogNewContactBinding
 import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.ARG_NAME
 import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.ARG_PHONE

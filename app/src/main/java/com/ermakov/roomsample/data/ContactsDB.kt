@@ -37,18 +37,13 @@ abstract class ContactsDB : RoomDatabase() {
             context: Context,
             scope: CoroutineScope
         ): ContactsDB {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ContactsDB::class.java,
-                    "word_database"
-                )
-                    .addCallback(WordDatabaseCallback(scope))
-                    .build()
+                    "contact_database"
+                ).addCallback(WordDatabaseCallback(scope)).build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

@@ -1,4 +1,4 @@
-package com.ermakov.roomsample.model
+package com.ermakov.roomsample.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

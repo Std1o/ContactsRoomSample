@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
-import com.ermakov.roomsample.model.Contact
+import com.ermakov.roomsample.domain.model.Contact
 import com.ermakov.roomsample.presentation.ui.adapter.ContactsListAdapter
 import com.ermakov.roomsample.presentation.ui.dialogs.NewContactDialogFragment
 import com.ermakov.roomsample.presentation.viewmodel.ContactsViewModel
@@ -16,13 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val wordViewModel by viewModels<ContactsViewModel>()
-
-    companion object {
-        const val KEY_ADD_OR_EDIT_CONTACT = "key_add_or_edit_contact"
-        const val ARG_NAME = "arg_name"
-        const val ARG_PHONE = "arg_phone"
-    }
+    private val viewModel by viewModels<ContactsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        wordViewModel.allWords.observe(this) { words ->
-            words.let { adapter.submitList(it) }
+        viewModel.allWords.observe(this) { contacts ->
+            contacts.let { adapter.submitList(it) }
         }
 
         val fab = findViewById<FloatingActionButton>(R.id.bntAdd)
@@ -42,16 +36,6 @@ class MainActivity : AppCompatActivity() {
             NewContactDialogFragment
                 .newInstance()
                 .show(supportFragmentManager, "new_contact")
-            setFragmentResultListeners()
-        }
-    }
-
-    private fun setFragmentResultListeners() {
-        supportFragmentManager.setFragmentResultListener(KEY_ADD_OR_EDIT_CONTACT, this) { _, bundle ->
-            val name = bundle.getString(ARG_NAME) ?: return@setFragmentResultListener
-            val phone = bundle.getString(ARG_PHONE) ?: return@setFragmentResultListener
-            val contact = Contact(name, phone)
-            wordViewModel.insert(contact)
         }
     }
 }

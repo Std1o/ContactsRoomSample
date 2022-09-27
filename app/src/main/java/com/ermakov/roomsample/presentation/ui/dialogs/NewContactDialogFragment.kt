@@ -7,16 +7,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.ermakov.roomsample.R
 import com.ermakov.roomsample.databinding.DialogNewContactBinding
-import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.ARG_NAME
-import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.ARG_PHONE
-import com.ermakov.roomsample.presentation.ui.activity.MainActivity.Companion.KEY_ADD_OR_EDIT_CONTACT
+import com.ermakov.roomsample.domain.ContactState
+import com.ermakov.roomsample.domain.model.Contact
+import com.ermakov.roomsample.presentation.viewmodel.NewContactViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NewContactDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: DialogNewContactBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModels<NewContactViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +43,27 @@ class NewContactDialogFragment : BottomSheetDialogFragment() {
 
         with(binding) {
             btnAdd.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString(ARG_NAME, name.text.toString())
-                bundle.putString(ARG_PHONE, phone.text.toString())
-                requireActivity()
-                    .supportFragmentManager
-                    .setFragmentResult(KEY_ADD_OR_EDIT_CONTACT, bundle)
-                dismiss()
+                addContact(name.text.toString(), phone.text.toString())
+            }
+            nameLayout.editText?.doOnTextChanged { _, _, _, _ ->
+                nameLayout.error = null
+            }
+            phoneLayout.editText?.doOnTextChanged { _, _, _, _ ->
+                phoneLayout.error = null
+            }
+        }
+    }
+
+    private fun addContact(name: String, phone: String) {
+        lifecycleScope.launch {
+            viewModel.addContact(Contact(name, phone)).collect {
+                if (it is ContactState.EmptyName) {
+                    binding.nameLayout.error = getString(R.string.required_field)
+                } else if (it is ContactState.EmptyPhone) {
+                    binding.phoneLayout.error = getString(R.string.required_field)
+                } else if (it is ContactState.Success) {
+                    dismiss()
+                }
             }
         }
     }

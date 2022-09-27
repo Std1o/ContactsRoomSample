@@ -1,7 +1,7 @@
 package com.ermakov.roomsample.data
 
 import androidx.annotation.WorkerThread
-import com.ermakov.roomsample.model.Contact
+import com.ermakov.roomsample.domain.model.Contact
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class Repository @Inject constructor(private val contactsDao: ContactsDao)  {
     // off the main thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(word: Contact) {
-        contactsDao.insert(word)
+    suspend fun addContact(contact: Contact) {
+        contactsDao.insert(contact)
     }
 }

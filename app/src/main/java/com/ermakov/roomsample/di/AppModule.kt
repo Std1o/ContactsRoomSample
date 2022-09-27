@@ -1,9 +1,9 @@
 package com.ermakov.roomsample.di
 
 import android.content.Context
-import com.ermakov.roomsample.data.WordDao
+import com.ermakov.roomsample.data.ContactsDao
 import com.ermakov.roomsample.data.WordRepository
-import com.ermakov.roomsample.data.WordRoomDatabase
+import com.ermakov.roomsample.data.ContactsDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,15 +19,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): WordRoomDatabase {
-        return WordRoomDatabase.getDatabase(appContext, CoroutineScope(SupervisorJob()))
+    fun provideAppDatabase(@ApplicationContext appContext: Context): ContactsDB {
+        return ContactsDB.getDatabase(appContext, CoroutineScope(SupervisorJob()))
     }
 
     @Provides
     @Singleton
-    fun provideDao(database: WordRoomDatabase) = database.wordDao()
+    fun provideDao(database: ContactsDB) = database.contactsDao()
 
     @Singleton
     @Provides
-    fun provideRepository(dao: WordDao) = WordRepository(dao)
+    fun provideRepository(contactsDao: ContactsDao) = WordRepository(contactsDao)
 }

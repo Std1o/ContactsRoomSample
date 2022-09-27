@@ -9,20 +9,20 @@ import com.ermakov.roomsample.model.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Word::class), version = 1, exportSchema = false)
-abstract class WordRoomDatabase : RoomDatabase() {
+@Database(entities = [Word::class], version = 1, exportSchema = false)
+abstract class ContactsDB : RoomDatabase() {
 
-    abstract fun wordDao(): WordDao
+    abstract fun contactsDao(): ContactsDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
-    ) : RoomDatabase.Callback() {
+    ) : Callback() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var wordDao = database.wordDao()
+                    val wordDao = database.contactsDao()
 
                     // Delete all content here.
                     wordDao.deleteAll()
@@ -43,18 +43,18 @@ abstract class WordRoomDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: WordRoomDatabase? = null
+        private var INSTANCE: ContactsDB? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): WordRoomDatabase {
+        ): ContactsDB {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WordRoomDatabase::class.java,
+                    ContactsDB::class.java,
                     "word_database"
                 )
                     .addCallback(WordDatabaseCallback(scope))

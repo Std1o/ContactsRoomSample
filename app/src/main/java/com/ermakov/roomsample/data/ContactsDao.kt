@@ -8,7 +8,7 @@ import com.ermakov.roomsample.model.Word
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface WordDao {
+interface ContactsDao {
 
     @Query("SELECT * FROM Word ORDER BY word ASC")
     fun getAlphabetizedWords(): Flow<List<Word>>

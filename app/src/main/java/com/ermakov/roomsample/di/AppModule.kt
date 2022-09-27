@@ -2,7 +2,7 @@ package com.ermakov.roomsample.di
 
 import android.content.Context
 import com.ermakov.roomsample.data.ContactsDao
-import com.ermakov.roomsample.data.WordRepository
+import com.ermakov.roomsample.data.Repository
 import com.ermakov.roomsample.data.ContactsDB
 import dagger.Module
 import dagger.Provides
@@ -29,5 +29,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(contactsDao: ContactsDao) = WordRepository(contactsDao)
+    fun provideRepository(contactsDao: ContactsDao) = Repository(contactsDao)
 }

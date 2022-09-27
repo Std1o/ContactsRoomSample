@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
 import com.ermakov.roomsample.model.Contact
 
-class WordListAdapter : ListAdapter<Contact, WordListAdapter.WordViewHolder>(WordsComparator()) {
+class ContactsListAdapter : ListAdapter<Contact, ContactsListAdapter.WordViewHolder>(WordsComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)

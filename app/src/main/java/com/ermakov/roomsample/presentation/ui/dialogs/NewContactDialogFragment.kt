@@ -55,15 +55,13 @@ class NewContactDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun addContact(name: String, phone: String) {
-        lifecycleScope.launch {
-            viewModel.addContact(Contact(name, phone)).collect {
-                if (it is ContactState.EmptyName) {
-                    binding.nameLayout.error = getString(R.string.required_field)
-                } else if (it is ContactState.EmptyPhone) {
-                    binding.phoneLayout.error = getString(R.string.required_field)
-                } else if (it is ContactState.Success) {
-                    dismiss()
-                }
+        viewModel.addContact(Contact(name, phone)).observe(viewLifecycleOwner) {
+            if (it is ContactState.EmptyName) {
+                binding.nameLayout.error = getString(R.string.required_field)
+            } else if (it is ContactState.EmptyPhone) {
+                binding.phoneLayout.error = getString(R.string.required_field)
+            } else if (it is ContactState.Success) {
+                dismiss()
             }
         }
     }

@@ -16,11 +16,11 @@ class NewContactViewModel @Inject constructor(
     private val addContactUseCase: AddContactUseCase
 ) : ViewModel() {
 
-    fun addContact(contact: Contact): StateFlow<ContactState> {
-        val stateFlow = MutableStateFlow<ContactState>(ContactState.Initial)
+    fun addContact(contact: Contact): LiveData<ContactState> {
+        val contactState: MutableLiveData<ContactState> = MutableLiveData()
         viewModelScope.launch {
-            stateFlow.emit(addContactUseCase(contact))
+            contactState.value = addContactUseCase(contact)
         }
-        return stateFlow
+        return contactState
     }
 }

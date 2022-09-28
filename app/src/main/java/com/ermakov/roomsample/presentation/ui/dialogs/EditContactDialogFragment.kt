@@ -7,37 +7,75 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ermakov.roomsample.databinding.DialogNewContactBinding
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import com.ermakov.roomsample.R
+import com.ermakov.roomsample.databinding.DialogEditContactBinding
+import com.ermakov.roomsample.domain.ContactState
+import com.ermakov.roomsample.domain.model.Contact
+import com.ermakov.roomsample.presentation.viewmodel.EditContactViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditContactDialogFragment : BottomSheetDialogFragment() {
 
-    private var _binding: DialogNewContactBinding? = null
+    private var _binding: DialogEditContactBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModels<EditContactViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogNewContactBinding.inflate(inflater, container, false)
+        _binding = DialogEditContactBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val bottomSheet = view.parent as View
-        bottomSheet.backgroundTintMode = PorterDuff.Mode.CLEAR;
-        bottomSheet.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT);
-        bottomSheet.setBackgroundColor(Color.TRANSPARENT);
+        bottomSheet.backgroundTintMode = PorterDuff.Mode.CLEAR
+        bottomSheet.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
+        bottomSheet.setBackgroundColor(Color.TRANSPARENT)
+        val contact = arguments?.getParcelable<Contact>(ARG_CONTACT)!!
+
+        with(binding) {
+            name.setText(contact.name)
+            phone.setText(contact.phone)
+            btnAdd.setOnClickListener {
+                val newContact = Contact(name.text.toString(), phone.text.toString())
+                newContact.id = contact.id
+                editContact(newContact)
+            }
+            nameLayout.editText?.doOnTextChanged { _, _, _, _ ->
+                nameLayout.error = null
+            }
+            phoneLayout.editText?.doOnTextChanged { _, _, _, _ ->
+                phoneLayout.error = null
+            }
+        }
+    }
+
+    private fun editContact(contact: Contact) {
+        viewModel.updateContact(contact).observe(viewLifecycleOwner) {
+            if (it is ContactState.EmptyName) {
+                binding.nameLayout.error = getString(R.string.required_field)
+            } else if (it is ContactState.EmptyPhone) {
+                binding.phoneLayout.error = getString(R.string.required_field)
+            } else if (it is ContactState.Success) {
+                dismiss()
+            }
+        }
     }
 
     companion object {
-        private const val ARG_ITEM_COUNT = "item_count"
+        private const val ARG_CONTACT= "contact"
 
-        fun newInstance(itemCount: Int): NewContactDialogFragment =
-            NewContactDialogFragment().apply {
+        fun newInstance(contact: Contact): EditContactDialogFragment =
+            EditContactDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_ITEM_COUNT, itemCount)
+                    putParcelable(ARG_CONTACT, contact)
                 }
             }
 

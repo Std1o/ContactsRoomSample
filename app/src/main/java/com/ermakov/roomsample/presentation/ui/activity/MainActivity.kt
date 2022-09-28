@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
 import com.ermakov.roomsample.domain.model.Contact
 import com.ermakov.roomsample.presentation.ui.adapter.ContactsListAdapter
+import com.ermakov.roomsample.presentation.ui.dialogs.EditContactDialogFragment
 import com.ermakov.roomsample.presentation.ui.dialogs.NewContactDialogFragment
 import com.ermakov.roomsample.presentation.viewmodel.ContactsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_edit_contact -> {
-                    Toast.makeText(this, "AJAJJA", Toast.LENGTH_LONG).show()
+                    EditContactDialogFragment
+                        .newInstance(contact)
+                        .show(supportFragmentManager, "edit_contact")
                 }
                 R.id.action_delete_contact -> {
                     //confirmAction(R.string.delete_request) { _, _ ->

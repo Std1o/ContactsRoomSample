@@ -9,12 +9,15 @@ class Repository @Inject constructor(private val contactsDao: ContactsDao)  {
 
     val allContacts: Flow<List<Contact>> = contactsDao.getAlphabetizedContacts()
 
-    // By default Room runs suspend queries off the main thread, therefore, we don't need to
-    // implement anything else to ensure we're not doing long running database work
-    // off the main thread.
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun addContact(contact: Contact) {
         contactsDao.insert(contact)
+    }
+
+    suspend fun updateContact(contact: Contact) {
+        contactsDao.update(contact)
+    }
+
+    suspend fun deleteContact(contact: Contact) {
+        contactsDao.delete(contact)
     }
 }

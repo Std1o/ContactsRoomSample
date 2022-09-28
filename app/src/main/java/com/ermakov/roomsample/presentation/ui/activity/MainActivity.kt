@@ -2,7 +2,11 @@ package com.ermakov.roomsample.presentation.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuInflater
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ermakov.roomsample.R
@@ -23,7 +27,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
-        val adapter = ContactsListAdapter()
+        val adapter = ContactsListAdapter { view, contact ->
+            showPopup(view, contact)
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -36,6 +42,26 @@ class MainActivity : AppCompatActivity() {
             NewContactDialogFragment
                 .newInstance()
                 .show(supportFragmentManager, "new_contact")
+        }
+    }
+
+    private fun showPopup(v: View, contact: Contact) {
+        val popup = PopupMenu(this, v)
+        val inflater: MenuInflater = popup.menuInflater
+        inflater.inflate(R.menu.contact_context_menu, popup.menu)
+        popup.show()
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_edit_contact -> {
+                    Toast.makeText(this, "AJAJJA", Toast.LENGTH_LONG).show()
+                }
+                R.id.action_delete_contact -> {
+                    //confirmAction(R.string.delete_request) { _, _ ->
+                    //    deleteParticipant(course, participant.id)
+                    //}
+                }
+            }
+            true
         }
     }
 }

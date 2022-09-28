@@ -8,7 +8,7 @@ import com.ermakov.roomsample.R
 import com.ermakov.roomsample.databinding.ItemContactBinding
 import com.ermakov.roomsample.domain.model.Contact
 
-class ContactsListAdapter(private var listener: (View, Contact) -> Unit) :
+class ContactsListAdapter(private val listener: ClickListener) :
     RecyclerView.Adapter<ContactsListAdapter.ContactsViewHolder>() {
 
     private var dataList: List<Contact> = emptyList()
@@ -38,11 +38,19 @@ class ContactsListAdapter(private var listener: (View, Contact) -> Unit) :
         with(holder) {
             binding.textView.text = itemView.context.getString(R.string.item_contact, name, phone)
             binding.btnMenu.setOnClickListener {
-                listener.invoke(binding.btnMenu, contact)
+                listener.onMenuClick(binding.btnMenu, contact)
+            }
+            itemView.setOnClickListener {
+                listener.onClick(contact.phone)
             }
         }
     }
 
     inner class ContactsViewHolder(val binding: ItemContactBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    interface ClickListener {
+        fun onClick(phone: String)
+        fun onMenuClick(view: View, contact: Contact)
+    }
 }

@@ -15,6 +15,7 @@ import com.ermakov.roomsample.presentation.ui.adapter.ContactsListAdapter
 import com.ermakov.roomsample.presentation.ui.dialogs.EditContactDialogFragment
 import com.ermakov.roomsample.presentation.ui.dialogs.NewContactDialogFragment
 import com.ermakov.roomsample.presentation.viewmodel.ContactsViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        viewModel.allWords.observe(this) { contacts ->
+        viewModel.allContacts.observe(this) { contacts ->
             contacts.let { adapter.submitList(it) }
         }
 
@@ -59,12 +60,22 @@ class MainActivity : AppCompatActivity() {
                         .show(supportFragmentManager, "edit_contact")
                 }
                 R.id.action_delete_contact -> {
-                    //confirmAction(R.string.delete_request) { _, _ ->
-                    //    deleteParticipant(course, participant.id)
-                    //}
+                    confirmDeletion(contact)
                 }
             }
             true
         }
+    }
+
+    private fun confirmDeletion(contact: Contact) {
+        MaterialAlertDialogBuilder(this)
+            .setMessage(R.string.delete_contact_request)
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.cancel()
+            }
+            .setPositiveButton(R.string.ok) { _, _ ->
+                viewModel.delete(contact)
+            }
+            .show()
     }
 }

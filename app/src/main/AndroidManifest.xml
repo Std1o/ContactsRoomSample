@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DataStoring">
         <activity
-            android:name=".presentation.ui.NewWordActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>

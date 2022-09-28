@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Data Storing</string>
-    <string name="hint_word">Word…</string>
-    <string name="button_save">Save</string>
+    <string name="app_name">Контакты</string>
     <string name="required_field">Поле обязательно к заполнению</string>
     <string name="add_word">Add word</string>
     <string name="name">Имя</string>

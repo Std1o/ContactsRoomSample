@@ -11,6 +11,7 @@
     <string name="item_contact">Имя: %s\nТелефон: %s</string>
     <string name="edit_contact">Редактировать контакт</string>
     <string name="delete_contact">Удалить контакт</string>
+    <string name="import_contact">Импортировать контакт</string>
     <string name="delete_contact_request">Удалить контакт?</string>
     <string name="cancel">Отмена</string>
     <string name="ok">OK</string>

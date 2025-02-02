@@ -1,6 +1,5 @@
 package com.ermakov.roomsample.domain.usecases
 
-import com.ermakov.roomsample.R
 import com.ermakov.roomsample.data.Repository
 import com.ermakov.roomsample.domain.ContactState
 import com.ermakov.roomsample.domain.model.Contact

@@ -9,7 +9,7 @@ import com.ermakov.roomsample.domain.model.Contact
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Contact::class], version = 1, exportSchema = false)
+@Database(entities = [Contact::class], version = 1, exportSchema = true)
 abstract class ContactsDB : RoomDatabase() {
 
     abstract fun contactsDao(): ContactsDao
